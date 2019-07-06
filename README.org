@@ -110,7 +110,7 @@ Currently, ~leaf.el~ and ~leaf-keywords.el~ has below rich keywords.
 
 * Install
 ** MELPA
-~leaf.el~ and ~leaf-keywords.el~ can install with package.el from MELPA, so sample instration code is below.
+~leaf.el~ and ~leaf-keywords.el~ can install with package.el from MELPA, so sample installation code is below.
 
 In order to work from Emacs-23, the package manager and the key binding manager
 that accompanies ~leaf~ must also be developed with the assumption that they will work from Emacs-23.
@@ -147,7 +147,7 @@ Package to be developed
 
 ** Manual install
 Put ~leaf.el~ at any folder added ~load-path~.
-Then ~(require 'leaf)~ and use like ~use-pacakge~.
+Then ~(require 'leaf)~ and use like ~use-package~.
 
 (In this example, you installed/loaded leaf directly, so you can configure ~package.el~ using ~leaf~.)
 #+BEGIN_SRC emacs-lisp
@@ -810,7 +810,7 @@ You can use all ~WHERE~ symbol such as
 #+end_src
 
 ** COMMENT :defaults keyword
-~:defalts~ provide to download recommended settings for specified package.
+~:defaults~ provide to download recommended settings for specified package.
 For more detail, see [[https://github.com/conao3/leaf-defaults.git][leaf-defaults]].
 #+BEGIN_SRC emacs-lisp
   (cort-deftest leaf-test/:simple-defaults
@@ -831,7 +831,7 @@ it is a best practice to use ~custom-set-variables~ to customize packages.
 
 You can of course set multiple variables and set the evaluation result of the S expression to a variable.
 
-The value set to ~custom-face~ should also be quoed to emphasize uniformity as ~leaf~.
+The value set to ~custom-face~ should also be quoted to emphasize uniformity as ~leaf~.
 
 #+begin_src emacs-lisp
   (cort-deftest-with-macroexpand leaf/custom
@@ -896,7 +896,7 @@ the ~:pre-setq~ keyword is also provided to accommodate them.
 
 The argument specified for ~:pre-setq~ is expanded before ~:require~.
 
-You can of course configure multiple variables adn set the evaluation result of some S expression to variable.
+You can of course configure multiple variables and set the evaluation result of some S expression to variable.
 #+begin_src emacs-lisp
   (cort-deftest-with-macroexpand leaf/setq
     '(((leaf alloc
@@ -1024,7 +1024,7 @@ If you want to specify major-mode, pass dotted pair value.
 ** :magic, :magic-fallback keywords
 ~:magic~ keyword define ~magic-mode-alist~. It is used to determine major-mode in binary header byte.
 
-~:magic-fallback~ keyward also define ~magic-fallback-alist~.
+~:magic-fallback~ keyword also define ~magic-fallback-alist~.
 
 #+begin_src emacs-lisp
   (cort-deftest-with-macroexpand leaf/magic
@@ -1097,7 +1097,7 @@ If you want to specify major-mode, pass dotted pair value.
 ** :hook keyword
 ~:hook~ keyword define ~add-hook~ via (add-to-list ~*-hook~).
 
-*Unlike use-package*, you must spesify the full hook name.
+*Unlike use-package*, you must specify the full hook name.
 It makes easy to jump definition.
 
 #+begin_src emacs-lisp
@@ -1184,12 +1184,12 @@ Use backquotes if you want the path to be relative to the current ~.emacs.d~, su
          :load-path ("~/.emacs.d/elpa-archive/leaf.el/")
          :load-path `(,(mapcar (lambda (elm)
                                  (concat "~/.emacs.d/elpa-archive/" elm "/"))
-                               '("leaf.el" "leaf-broser.el" "orglyth.el")))
+                               '("leaf.el" "leaf-browser.el" "orglyth.el")))
          :require t
          :config (leaf-init))
        (prog1 'leaf
          (add-to-list 'load-path "~/.emacs.d/elpa-archive/leaf.el/")
-         (add-to-list 'load-path "~/.emacs.d/elpa-archive/leaf-broser.el/")
+         (add-to-list 'load-path "~/.emacs.d/elpa-archive/leaf-browser.el/")
          (add-to-list 'load-path "~/.emacs.d/elpa-archive/orglyth.el/")
          (require 'leaf)
          (leaf-init)))))
@@ -1209,7 +1209,7 @@ you do not need to pass an exact ~t~ to convert it to ~nil~ because it is compar
 
 #+begin_src emacs-lisp
   (defvar leaf-keywords
-    (cdt
+    (cdr
      '(:dummy
        :disabled (unless (eval (car leaf--value)) `(,@leaf--body))
        ...)))
@@ -1392,7 +1392,7 @@ The arguments specified for this keyword have no effect on the result of the con
 #+BEGIN_SRC emacs-lisp
   (cort-deftest-with-macroexpand leaf/doc
     '(((leaf leaf
-         :doc "Symplify init.el configuration"
+         :doc "Simplify init.el configuration"
          :config (leaf-init))
        (prog1 'leaf
          (leaf-init)))
@@ -1410,7 +1410,7 @@ The arguments specified for this keyword have no effect on the result of the con
          (leaf-init)))
 
       ((leaf leaf
-         :doc "Symplify init.el configuration"
+         :doc "Simplify init.el configuration"
          :file "~/.emacs.d/elpa/leaf.el/leaf.el"
          :url "https://github.com/conao3/leaf.el"
          :config (leaf-init))
@@ -1418,10 +1418,10 @@ The arguments specified for this keyword have no effect on the result of the con
          (leaf-init)))
 
       ((leaf leaf
-         :doc "Symplify init.el configuration"
+         :doc "Simplify init.el configuration"
          "
   (leaf leaf
-    :doc \"Symplify init.el configuration\"
+    :doc \"Simplify init.el configuration\"
     :config (leaf-init))
    => (progn
         (leaf-init))"
@@ -1439,7 +1439,7 @@ The arguments specified for this keyword have no effect on the result of the con
 #+END_SRC
 
 * System keywords
-System keywords enabled by defalts on all leaf-block.
+System keywords enabled by defaults on all leaf-block.
 
 If you disable temporary, pass these keyword to ~nil~,
 or add ~nil~ to ~leaf-defaults~ to disable all leaf-block
@@ -1616,7 +1616,7 @@ It is clear what internal conversion is done and it is also easy to customize it
 5. Run conversion process keyword.
 
    The conversion definition is ~leaf-keywords~, overridden ~leaf--body~
-6. Wrap finaly ~leaf--body~ with ~prog1~.
+6. Wrap finally ~leaf--body~ with ~prog1~.
 
 *** Adding new keywords
 ~leaf~ normalize argument with ~leaf-normalize~, and conversion with ~leaf-keywords~.
@@ -1640,10 +1640,10 @@ Now, ~leaf~ support Emacs-23 or above.
 
 ** Migration
 *** leaf v2.0 to v3.0
-**** Drop bind-key.el support for :bind and faether.el support for :ensure
+**** Drop bind-key.el support for :bind and feather.el support for :ensure
 To make ~leaf~ dependent only on packages that are itself and packages attached to and Emacs,
 we have removed the back-end selection for ~bind-key~ and ~leaf-key~ for ~:bind~
-and the back-end selection for ~package.el~, ~feathre.el~, and ~el-get~ for ~:ensure~.
+and the back-end selection for ~package.el~, ~feather.el~, and ~el-get~ for ~:ensure~.
 
 You should now use the external package specific keywords, such as
 ~:bind-key~ and ~:el-get~, ~:feather~, defined in [[https://github.com/conao3/leaf-keywords.el][leaf-keywords.el]].
